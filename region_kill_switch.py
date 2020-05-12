@@ -25,6 +25,15 @@ def vpc(region='us-west-2'):
                     RuleNumber=1,
                     NetworkAclId=nacl['NetworkAclId'] 
                 )
+                client.create_network_acl_entry(
+                    DryRun=True,
+                    Ipv6CidrBlock='::0/0',
+                    Egress=False,
+                    Protocol='-1',
+                    RuleAction='deny',
+                    RuleNumber=2,
+                    NetworkAclId=nacl['NetworkAclId'] 
+                )
                 # Block all Outbound traffic
                 client.create_network_acl_entry(
                     DryRun=True,
@@ -33,6 +42,15 @@ def vpc(region='us-west-2'):
                     Protocol='-1',
                     RuleAction='deny',
                     RuleNumber=1,
+                    NetworkAclId=nacl['NetworkAclId'] 
+                )
+                client.create_network_acl_entry(
+                    DryRun=True,
+                    Ipv6CidrBlock='::0/0',
+                    Egress=True,
+                    Protocol='-1',
+                    RuleAction='deny',
+                    RuleNumber=2,
                     NetworkAclId=nacl['NetworkAclId'] 
                 )
 
